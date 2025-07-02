@@ -42,7 +42,8 @@
     <td>
       <div class="main-blue-button-2">
       <a href="{% url 'obtener_estudiante' e.id %}">ver</a> <br>
-      <a href="{% url 'editar_estudiante' e.id %}">editar</a> <br>
+      <a href="{% url 'editar_estudiante' e.id %}">
+      <i class="fa fa-edit"></i></a><br>
       <a href="{% url 'eliminar_estudiante' e.id %}"
       onclick="return confirm('¿Está seguro de la eliminación?')" >
       eliminar</a>
