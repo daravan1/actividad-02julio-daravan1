@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 
-from administrativo.models import Matricula
+from administrativo.models import Matricula,Modulo, Estudiante
 
 class MatriculaForm(ModelForm):
     class Meta:
@@ -28,3 +28,25 @@ class MatriculaEditForm(ModelForm):
                 'cols': 40,
                 'placeholder': 'Escribe aquí tu comentario...'
             }),}
+
+class ModuloForm(ModelForm):
+    class Meta:
+        model = Modulo
+        fields = ['nombre']
+        widgets = {
+            'nombre': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Selecciona un módulo'
+            }),
+        }
+class EstudianteForm(ModelForm):
+    class Meta:
+        model = Estudiante
+        fields = ['nombre', 'apellido', 'cedula', 'edad', 'tipo_estudiante']
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'apellido': forms.TextInput(attrs={'class': 'form-control'}),
+            'cedula': forms.TextInput(attrs={'class': 'form-control'}),
+            'edad': forms.NumberInput(attrs={'class': 'form-control'}),
+            'tipo_estudiante': forms.Select(attrs={'class': 'form-control'}),
+        }

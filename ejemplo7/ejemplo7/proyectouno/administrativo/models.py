@@ -43,7 +43,6 @@ class Modulo(models.Model):
     nombre = models.CharField(max_length=30, \
             choices=opciones_modulo)
     estudiantes = models.ManyToManyField(Estudiante, through='Matricula')
-
     def __str__(self):
         return "Módulo: %s" % (self.nombre)
 
@@ -56,6 +55,7 @@ class Matricula(models.Model):
     modulo = models.ForeignKey(Modulo, related_name='lasmatriculas',
             on_delete=models.CASCADE)
     comentario = models.CharField(max_length=200)
+    costo = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     # Agregar costo
 
