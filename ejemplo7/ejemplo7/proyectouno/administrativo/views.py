@@ -74,6 +74,8 @@ def detalle_estudiante(request, id):
     informacion_template = {'e': estudiante}
     return render(request, 'detalle_estudiante.html', informacion_template)
 
+
+
 # ver los módulos
 #    nombre del módulp
 #    valor de todas las matriculas del módulo    
