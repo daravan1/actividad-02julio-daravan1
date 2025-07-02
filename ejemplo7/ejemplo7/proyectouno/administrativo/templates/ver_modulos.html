@@ -1,0 +1,22 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Listado de Estudiantes
+{% endblock %}
+{% block content %}
+<h2>Ver Modulos</h2>
+<table border="1px">
+  <tr>
+    <th><b>Nombre</b></th>
+    <th><b>Descripción</b></th>
+    <th><b>Opciones</b></th>
+  </tr>
+  {% for m in modulos %}
+  <tr>
+    <td>{{m.nombre}}</td>
+    <td>{{m.descripcion}}</td>
+  </tr>
+  {% endfor %}
+
+  [<a href="{% url 'index' %}">inicio</a>]
+{% endblock %}
