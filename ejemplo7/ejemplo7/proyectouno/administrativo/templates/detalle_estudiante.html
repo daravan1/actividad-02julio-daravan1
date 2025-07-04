@@ -6,53 +6,80 @@
 
 {% block content %}
 
-    <body id="top">
+<body id="top">
 
-        <main>
-           <header class="site-header d-flex flex-column justify-content-center align-items-center">
-                <div class="container">
-                    <div class="row justify-content-center align-items-center">
+    <main>
+        <header class="site-header d-flex flex-column justify-content-center align-items-center">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
 
-                        <div class="col-lg-5 col-12 mb-5">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
-
-                                    <li class="breadcrumb-item active" aria-current="page">Ver Estudiante</li>
-                                </ol>
-                            </nav>
-                            <h2 class="text-white">Detalle de Estudiante</h2>
-                        </div>
+                    <div class="col-lg-5 col-12 mb-5">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Ver Estudiante</li>
+                            </ol>
+                        </nav>
+                        <h2 class="text-white">Detalle de Estudiante</h2>
                     </div>
                 </div>
-            </header>
-            <section class="section-padding">
-              <div class="container">
+            </div>
+        </header>
+
+        <section class="section-padding">
+            <div class="container">
                 <div class="row">
-                  <div class="col-lg-8 col-12 mt-3 mx-auto">
-                    <div class="custom-block custom-block-topics-listing bg-white shadow-lg p-4 mb-5">
+                    <div class="col-lg-8 col-12 mt-3 mx-auto">
+                        <div class="custom-block custom-block-topics-listing bg-white shadow-lg p-4 mb-5">
 
-                      <h3 class="mb-4">{{ e.nombre }} {{ e.apellido }}</h3>
+                            <h3 class="mb-4">{{ e.nombre }} {{ e.apellido }}</h3>
 
-                      <div class="row">
-                        <div class="col-md-6 mb-3">
-                          <strong>Nombre:</strong> {{ e.nombre }}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <strong>Nombre:</strong> {{ e.nombre }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Apellido:</strong> {{ e.apellido }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Edad:</strong> {{ e.edad }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Cédula:</strong> {{ e.cedula }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Tipo de Estudiante:</strong> {{ e.get_tipo_estudiante_display }}
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                          <strong>Apellido:</strong> {{ e.apellido }}
+
+                        <!-- Sección de Matrículas (solo costos) -->
+                        <div class="custom-block custom-block-topics-listing bg-white shadow-lg p-4 mb-5">
+                            <h4 class="mb-4"> Matrículas Asignadas al estudiante</h4>
+
+                            {% if matriculas %}
+                                <ul class="list-group">
+                                    {% for m in matriculas %}
+                                        <li class="list-group-item">
+                                            Módulo: <strong>{{ m.modulo.nombre }}</strong> —
+                                            Comentario: {{ m.comentario }} —
+                                            Costo: <strong>${{ m.costo }}</strong>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="text-muted">Este estudiante no tiene matrículas registradas.</p>
+                            {% endif %}
                         </div>
-                        <div class="col-md-6 mb-3">
-                          <strong>Edad:</strong> {{ e.edad }}
-                        </div>
-                        <div class="col-md-6 mb-3">
-                          <strong>Cédula:</strong> {{ e.cedula }}
-                        </div>
-                      </div>
+                        <!-- Fin sección -->
+
                     </div>
-                  </div>
                 </div>
-              </div>
-            </section>
+            </div>
+        </section>
 
+    </main>
+
+</body>
 
 {% endblock %}
