@@ -1,22 +1,57 @@
 {% extends "master.html" %}
 
 {% block title %}
-  Listado de Estudiantes
+  Listado de Módulos
 {% endblock %}
-{% block content %}
-<h2>Ver Modulos</h2>
-<table border="1px">
-  <tr>
-    <th><b>Nombre</b></th>
-    <th><b>Descripción</b></th>
-    <th><b>Opciones</b></th>
-  </tr>
-  {% for m in modulos %}
-  <tr>
-    <td>{{m.nombre}}</td>
-    <td>{{m.descripcion}}</td>
-  </tr>
-  {% endfor %}
 
-  [<a href="{% url 'index' %}">inicio</a>]
+{% block content %}
+<section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-12 mx-auto">
+        <h1 class="text-white text-center">Listado de Módulos</h1>
+        <h6 class="text-center">Número de Módulos {{ modulos_info|length }}</h6>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="featured-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-12">
+        <div class="custom-block custom-block-overlay">
+          <div class="d-flex flex-column h-100">
+            <table id="tabla_datos" class="display">
+              <thead>
+                <tr>
+                  <th><b>Nombre del Módulo</b></th>
+                  <th><b>Valor Total Recaudado</b></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in modulos_info %}
+                <tr>
+                  <td>{{ item.modulo.nombre }}</td>
+                  <td>${{ item.valor_total }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="4" class="text-center">No hay módulos registrados.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript">
+  $(document).ready( function () {
+    $('#tabla_datos').DataTable();
+  });
+</script>
 {% endblock %}
