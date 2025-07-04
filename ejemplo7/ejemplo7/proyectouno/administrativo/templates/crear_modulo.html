@@ -1,16 +1,60 @@
 {% extends "master.html" %}
 
 {% block title %}
-  Listado de Estudiantes
+  Crear Módulo
 {% endblock %}
+
 {% block content %}
-<h2>Crear Modulo</h2>
 
-<form action="" method="post">
-  {% csrf_token %}
-  {{formulario.as_p}}
-  <p><input type='submit' value='Agregar'/></p>
-</form>
+<main>
+  <header class="site-header d-flex flex-column justify-content-center align-items-center">
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-5 col-12 mb-5">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Crear Módulo</li>
+            </ol>
+          </nav>
+          <h2 class="text-white">Crear Módulo</h2>
+        </div>
+      </div>
+    </div>
+  </header>
 
-[<a href="{% url 'index' %}">inicio</a>]
+  <section class="section-padding section-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-12 mt-3 mx-auto">
+          <div class="custom-block custom-block-topics-listing bg-white shadow-lg p-4 mb-5">
+            <h3 class="mb-4">Complete los datos del Módulo</h3>
+
+            <form method="post" class="custom-form contact-form" role="form">
+              {% csrf_token %}
+              <div class="row">
+                {% for field in formulario %}
+                  <div class="col-lg-12 mb-3">
+                    <div class="form-floating">
+                      {{ field }}
+                      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                      {% if field.errors %}
+                        <div class="text-danger small">{{ field.errors|striptags }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endfor %}
+
+                <div class="col-lg-4 col-12 ms-auto">
+                  <button type="submit" class="form-control btn btn-primary">Crear</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
 {% endblock %}

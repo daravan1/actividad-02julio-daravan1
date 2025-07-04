@@ -1,10 +1,54 @@
+{% extends "master.html" %}
 
+{% block title %}
+  Detalle de Matrícula
+{% endblock %}
 
-<h3>Detalle de Matricula</h3>
+{% block content %}
 
-<b>Nombre:</b> {{matricula.estudiante}}
-</br>
-<b>Modulo:</b> {{matricula.modulo}}
+<header class="site-header d-flex flex-column justify-content-center align-items-center">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5 col-12 mb-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Ver Matrícula</li>
+          </ol>
+        </nav>
+        <h2 class="text-white">Detalle de Matrícula</h2>
+      </div>
+    </div>
+  </div>
+</header>
 
-</br>
-[<a href="{% url 'index' %}">inicio</a>]
+<section class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-12 mt-3 mx-auto">
+        <div class="custom-block custom-block-topics-listing bg-white shadow-lg p-4 mb-5">
+
+          <h3 class="mb-4">Detalle de Matrícula</h3>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <strong>Nombre del Estudiante:</strong> {{ matricula.estudiante }}
+            </div>
+            <div class="col-md-6 mb-3">
+              <strong>Módulo:</strong> {{ matricula.modulo }}
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <a href="{% url 'detalle_estudiante' matricula.estudiante.id %}" class="btn btn-primary">
+              Ver datos del estudiante
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

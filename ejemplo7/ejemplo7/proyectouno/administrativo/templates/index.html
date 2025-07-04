@@ -5,36 +5,67 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{mititulo}}</h1>
-<hr>
-<h3>Número de Matriculas {{ numero_matriculas }}</h3>
-<table border="1px">
-  <tr>
-    <th><b>Estudiante</b></th>
-    <th><b>Módulo</b></th>
-    <th><b>Comentario</b></th>
-    <th><b>Opciones</b></th>
-  </tr>
-  {% for e in matriculas %}
-  <tr>
-    <td>
-      {{e.estudiante.nombre}} <br>
-      {{e.estudiante.get_tipo_estudiante_display }}
-      [<a href="{% url 'detalle_estudiante' e.estudiante.id %}">+</a>]
-    </td>
-    <td>
-      {{e.modulo.nombre}}
-    </td>
-    <td>
-      {{e.comentario}}
-    </td>
-    <td>
-      [<a href="{% url 'detalle_matricula' e.id %}">ver</a>]
-      [<a href="{% url 'editar_matricula' e.id %}">editar</a>]
-    </td>
-  </tr>
-  {% endfor %}
+<section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+                <div class="container">
+                    <div class="row">
 
-</table>
-<hr>
+                        <div class="col-lg-8 col-12 mx-auto">
+                            <h1 class="text-white text-center">{{mititulo}}</h1>
+                            <h6 class="text-center">Número de Matriculas {{ numero_matriculas }}</h6>
+                        </div>
+                    </div>
+                </div>
+</section>
+
+<section class="featured-section">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-12">
+                            <div class="custom-block custom-block-overlay" >
+                                <div class="d-flex flex-column h-100">
+                                    <table id="tabla_datos" class="display">
+                                      <thead>
+                                        <tr>
+                                          <th><b>Estudiante</b></th>
+                                          <th><b>Módulo</b></th>
+                                          <th><b>Comentario</b></th>
+                                          <th><b>Opciones</b></th>
+                                        </tr>
+                                      </thead>
+                                       <tbody>
+                                        {% for e in matriculas %}
+                                        <tr>
+                                          <td>
+                                            {{e.estudiante.nombre}} <br>
+                                            {{e.estudiante.get_tipo_estudiante_display }}
+                                            [<a href="{% url 'detalle_estudiante' e.estudiante.id %}">+</a>]
+                                          </td>
+                                          <td>
+                                            {{e.modulo.nombre}}
+                                          </td>
+                                          <td>
+                                            {{e.comentario}}
+                                          </td>
+                                          <td>
+                                            [<a href="{% url 'detalle_matricula' e.id %}">ver</a>]
+                                            [<a href="{% url 'editar_matricula' e.id %}">editar</a>]
+                                          </td>
+                                        </tr>
+                                        {% endfor %}
+                                      </tbody>
+                                    </table>
+                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+<script type="text/javascript">
+  $(document).ready( function () {
+    $('#tabla_datos').DataTable();
+  });
+</script>
+
 {% endblock %}

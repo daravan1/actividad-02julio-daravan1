@@ -1,33 +1,58 @@
-<h2>Detalle estudiante</h2>
+{% extends "master.html" %}
 
-<b>Nombre:</b> {{e.nombre}}
-</br>
-<b>Apellido:</b> {{e.apellido}}
-</br>
-<b>Edad:</b> {{e.edad}}
-</br>
-<b>Cédula:</b> {{e.cedula}}
-</br>
-<hr>
-<table border="1px">
-  <tr>
-    <th><b>Módulo</b></th>
-    <th><b>comentario</b></th>
+{% block title %}
+  Detalle de Estudiante
+{% endblock %}
 
-  </tr>
-  {% for m in e.obtener_matriculas %}
-  <tr>
-    <td>
-      {{m.modulo.nombre}}
-    </td>
-    <td>
-      {{m.comentario}}
-    </td>
+{% block content %}
 
-  </tr>
-  {% endfor %}
+    <body id="top">
 
-</table>
+        <main>
+           <header class="site-header d-flex flex-column justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
 
-</br>
-[<a href="{% url 'index' %}">inicio</a>]
+                        <div class="col-lg-5 col-12 mb-5">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+
+                                    <li class="breadcrumb-item active" aria-current="page">Ver Estudiante</li>
+                                </ol>
+                            </nav>
+                            <h2 class="text-white">Detalle de Estudiante</h2>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <section class="section-padding">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 col-12 mt-3 mx-auto">
+                    <div class="custom-block custom-block-topics-listing bg-white shadow-lg p-4 mb-5">
+
+                      <h3 class="mb-4">{{ e.nombre }} {{ e.apellido }}</h3>
+
+                      <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <strong>Nombre:</strong> {{ e.nombre }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <strong>Apellido:</strong> {{ e.apellido }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <strong>Edad:</strong> {{ e.edad }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <strong>Cédula:</strong> {{ e.cedula }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+
+{% endblock %}
